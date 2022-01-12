@@ -78,7 +78,7 @@ exports.product = [{
 
     subject: "German",
     location: "Inverness",
-    price: "49",
+    price: "490",
     stock: 9,
     image: "https://media.istockphoto.com/vectors/german-hand-drawn-doodles-and-lettering-vector-id1096979810?k=20&m=1096979810&s=612x612&w=0&h=SVpuNYx9NZ694SquvFf-F4cqp75-4UT90tD41zsOenQ=",
     rating: 3,
