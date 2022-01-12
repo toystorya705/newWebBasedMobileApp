@@ -30,7 +30,7 @@ exports.product = [{
 
     subject: "Science",
     location: "Newcastle upon Tyne",
-    price: "120",
+    price: "1200",
     stock: 11,
     image: "https://image.freepik.com/free-vector/science-education-background_23-2148486901.jpg",
     rating: 5,
