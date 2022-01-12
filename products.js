@@ -20,7 +20,7 @@ exports.product = [{
 
     subject: "English Language",
     location: "Liverpool",
-    price: "90",
+    price: "900",
     stock: 8,
     image: "https://thumbs.gfycat.com/GreatBlaringFlyingfish-max-1mb.gif",
     rating: 2,
