@@ -2,7 +2,7 @@ exports.product = [{
 
     subject: "English Litreature",
     location: "Lucknow",
-    price: "50",
+    price: "500",
     stock: 6,
     image: "http://1.bp.blogspot.com/-Mu8arOTSEzo/TxrurYbAWNI/AAAAAAAAAGI/lqrgOo0ywXM/s1600/language-arts-reading-material+copy.gif",
     rating: 3,
