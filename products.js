@@ -68,7 +68,7 @@ exports.product = [{
 
     subject: "Sanskrit",
     location: "Delhi",
-    price: "500",
+    price: "5000",
     stock: 33,
     image: "https://qph.fs.quoracdn.net/main-qimg-1d51019c9ed6da1026d5c55f832cfb40",
     rating: 2,
