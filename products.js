@@ -88,7 +88,7 @@ exports.product = [{
 
     subject: "Chinese",
     location: "Manchester",
-    price: "300",
+    price: "3000",
     stock: 10,
     image: "https://x2.sdimgs.com/sd_static/u/201311/52736f1841dee.gif",
     rating: 2,
