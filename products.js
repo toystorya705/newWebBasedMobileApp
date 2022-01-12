@@ -39,7 +39,7 @@ exports.product = [{
 
     subject: "EVS",
     location: "Birmingham",
-    price: "9",
+    price: "90",
     stock: 50,
     image: "https://mindlercareerlibrarynew.imgix.net/9I-Environmental_Science.png",
     rating: 1,
