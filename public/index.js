@@ -28,9 +28,9 @@ let app = new Vue({
             this.product = data;
         },
         addItem(itemId) {
-            if (product[itemId].stock > 0) {
+            if (this.product[itemId].stock > 0) {
 
-                this.stock = --product[itemId].stock;
+                this.stock = --this.product[itemId].stock;
                 this.cart.push(itemId);
             }
         },
@@ -54,7 +54,7 @@ let app = new Vue({
             return count;
         },
         removeButton(index) {
-            product[index].stock++;
+            this.product[index].stock++;
             for (let i = 0; i < this.cart.length; i++) {
                 if (this.cart[i] == index) {
                     this.cart.splice(i, 1);
