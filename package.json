@@ -7,7 +7,7 @@
     "plotly.js-dist": "^2.8.3"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "name": "newwebbasedmobileapp",
   "description": "Code Link: https://github.com/toystorya705/webBasedMobileApp",
