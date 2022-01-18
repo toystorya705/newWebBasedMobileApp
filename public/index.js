@@ -8,25 +8,25 @@ let app = new Vue({
         filterName: '',
         filter: '',
         sort: '',
-        messageCheckout:"",
+        messageCheckout: "",
         order: {
             name: "",
             phone: "",
-          
+
         },
-     
+
 
         cart: []
     },
     methods: {
         //  This function decrease the value of stock by 1 every time user click Button
- 
 
-        productsFetch: async function(){
-    const response = await fetch("/lessons");
-    const data = await response.json();
-    this.product = data;
-},
+
+        productsFetch: async function () {
+            const response = await fetch("/lessons");
+            const data = await response.json();
+            this.product = data;
+        },
         addItem(itemId) {
             if (product[itemId].stock > 0) {
 
@@ -64,30 +64,30 @@ let app = new Vue({
 
 
         },
-        placeOrder(){
-            this.messageCheckout="Order Placed";
+        placeOrder() {
+            this.messageCheckout = "Order Placed";
         },
         filterClick() {
-            
-      
-                this.sort = "asec"
-            
-           
+
+
+            this.sort = "asec"
+
+
         },
-        defaultClick(){
-         
-                this.sort =""
-            
+        defaultClick() {
+
+            this.sort = ""
+
         }
 
     },
     computed: {// This disables the button at 0 stock
         cartCheckDisable: function () {
-            if (this.showProduct == false){
-                this.filter="";// This will clear the search term once the user goes back to lesson page
-               this.messageCheckout="";
+            if (this.showProduct == false) {
+                this.filter = "";// This will clear the search term once the user goes back to lesson page
+                this.messageCheckout = "";
                 return false;
-                
+
             }
             else
                 return this.cart.length === 0;
@@ -96,7 +96,7 @@ let app = new Vue({
             return this.cart.length || '';
 
         },
-      
+
 
 
         getproduct() {
@@ -106,14 +106,14 @@ let app = new Vue({
             });
 
             if (this.filterName == "subject") {
-               
+
                 if (this.sort == 'dsec') {
-                  
+
                     return product.sort((a, b) => (b.subject > a.subject ? 1 : -1));
 
                 }
                 else if (this.sort == 'asec') {
-                  
+
                     return product.sort((a, b) => (b.subject < a.subject ? 1 : -1));
                 }
             }
@@ -133,7 +133,7 @@ let app = new Vue({
             }
             //  let x = list.sort((a, b) => (a.name > b.name ? 1 : -1));
             else if (this.filterName == "location") {
-         
+
                 if (this.sort == 'dsec') {
                     return product.sort((a, b) => (b.location > a.location ? 1 : -1));
 
@@ -168,8 +168,8 @@ let app = new Vue({
         },
         submitForm() {
 
-            if (this.order.name.match(/[A-Za-z]/) && this.order.phone.match(/[0-9]/) && this.order.phone.length >= 10){
-               
+            if (this.order.name.match(/[A-Za-z]/) && this.order.phone.match(/[0-9]/) && this.order.phone.length >= 10) {
+
                 return false;
             }
             else
@@ -177,8 +177,39 @@ let app = new Vue({
 
         },
     },
-    mounted: function(){
-this.productsFetch();
+    mounted: function () {
+        this.productsFetch();
     }
 });
+
+// var layout = {
+//     title: "Plot Title",
+//     xaxis: {
+//       title: "x Axis",
+//       titlefont: {
+//         family: "Courier New, monospace",
+//         size: 18,
+//         color: "#7f7f7f"
+//       }
+//     },
+//     yaxis: {
+//       title: "y Axis",
+//       titlefont: {
+//         family: "Courier New, monospace",
+//         size: 18,
+//         color: "#7f7f7f"
+//       }
+//     }
+//   };
+//   var graphOptions = {layout: layout, filename: "styling-names", fileopt: "overwrite"};
+
+// var plotDiv = document.getElementById('plot');
+// var traces = [
+// 	{x: [1,2,3], y: [2,8,7], stackgroup: 'one', groupnorm:'percent',name:"Positive"},
+// 	{x: [7,2,3], y: [5,1,2], stackgroup: 'one',name:"Negative"},
+// 	{x: [1,2,3], y: [3,6,1], stackgroup: 'one',name:"Neutralt"},
+// ];
+// traces[0].title="rr";
+// Plotly.newPlot('myDiv', traces, {title: 'Gridcoin Sentiment Chart',xaxis:{title:"Time"},yaxis:{title:"Price"}});
+
 

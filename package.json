@@ -2,6 +2,25 @@
   "dependencies": {
     "ajax": "^0.0.4",
     "express": "^4.17.2",
-    "http": "^0.0.1-security"
-  }
+    "http": "^0.0.1-security",
+    "mongodb": "^4.3.0",
+    "plotly.js-dist": "^2.8.3"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "newwebbasedmobileapp",
+  "description": "Code Link: https://github.com/toystorya705/webBasedMobileApp",
+  "version": "1.0.0",
+  "main": "products.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toystorya705/newWebBasedMobileApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toystorya705/newWebBasedMobileApp/issues"
+  },
+  "homepage": "https://github.com/toystorya705/newWebBasedMobileApp#readme"
 }
