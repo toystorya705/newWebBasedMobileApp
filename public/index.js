@@ -1,4 +1,5 @@
 
+
 let app = new Vue({
     el: "#app",
     data: {
@@ -11,7 +12,7 @@ let app = new Vue({
         messageCheckout: "",
         order: {
             name: "",
-            phone: "",
+            phone: ""
 
         },
 
@@ -23,7 +24,7 @@ let app = new Vue({
 
 
         productsFetch: async function () {
-            const response = await fetch("/lessons");
+            const response = await fetch("/collection/products");
             const data = await response.json();
             this.product = data;
         },
@@ -31,6 +32,7 @@ let app = new Vue({
             if (this.product[itemId].stock > 0) {
 
                 this.stock = --this.product[itemId].stock;
+                console.log(this.product[itemId].stock);
                 this.cart.push(itemId);
             }
         },
@@ -64,8 +66,39 @@ let app = new Vue({
 
 
         },
-        placeOrder() {
+        placeOrder: async function () {
+
+
+            console.log("hdjdjdjdj")
+            let orderCheck={
+                orderProducts:[]
+            }
+            orderCheck = Object.assign({}, this.order,orderCheck);
+            for (let i = 0; i < this.product.length; i++) {
+                if (this.cartCount(this.product[i].id) != 0) {
+                    orderCheck.orderProducts.push({
+                        productID: this.product[i].id,
+                        stock: this.product[i].stock
+
+                    });
+                    console.log("hjueheufjeferf");
+
+                }
+            }
+            console.log(orderCheck);
+
+            const response = await fetch("/collection/users", {
+                method: 'POST', //JSON
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: (JSON.stringify(orderCheck))//Sending object for if statement
+            });
+            const result = await response.text();//Receiving response
+
+
             this.messageCheckout = "Order Placed";
+
         },
         filterClick() {
 

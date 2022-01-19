@@ -2,7 +2,7 @@
 const { json } = require('body-parser');
 let express = require('express');
 let url = require("url");
-let product = require("./products")
+
 const port = process.env.PORT || 3000
 //The express module is a function. When it is executed it returns an app object
 let app = express();
@@ -69,6 +69,7 @@ app.get('/'
 // retrieve all the objects from an collection
 app.get('/collection/:collectionName'
     , (req, res) => {
+        console.log("yoyoy")
         req.collection.find({}).toArray((e, results) => {
             if (e) return next(e)
             res.send(results)
@@ -85,7 +86,7 @@ app.post('/collection/:collectionName'
     })
 
 //Start the app listening on port 8080
-app.listen(port);
+app.listen(8080);
 
 async function handleProductGet(request, response) {
 
