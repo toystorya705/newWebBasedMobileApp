@@ -6,28 +6,10 @@ let url = require("url");
 const port = process.env.PORT || 3000
 //The express module is a function. When it is executed it returns an app object
 let app = express();
-// app.post('mongodb+srv://aryan1234:aryan1234@cluster0.eyuvc.mongodb.net'
-// , (req, res, next) => {
-// req.collection.insert(req.body, (e, results) => {
-// if (e) return next(e)
-// res.send(results.ops)
-// })
-// })
-
-
-// mongodb+srv://aryan1234:<password>@cluster0.eyuvc.mongodb.net
-
 
 app.use(express.static("public"));
 
-// const { MongoClient } = require('mongodb');
-// const uri = "mongodb+srv://aryan1234:aryan1234@cluster0.eyuvc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-// client.connect(err => {
-//     const collection = client.db("test").collection("devices");
-//     // perform actions on the collection object
-//     client.close();
-// });
+
 
 
 //Set up the application to handle GET requests sent to the user path
@@ -40,6 +22,14 @@ app.get('/user', function (req, res) {
     res.send(JSON.stringify({ email: "dd@gmail.com", password: "123456789" }));
 });
 
+app.use(function (request, response, next) { // middleware
+    console.log("In comes a request to: " + request.url);
+    //     console.log("Request IP: " + req.url);
+    // console.log("Request date: " + new Date());
+
+    next();
+    // response.end("Hello, world!");
+});
 
 
 // load Express.js
@@ -60,12 +50,47 @@ app.param('collectionName'
         // console.log('collection name:', req.collection)
         return next()
     });
+var path = require("path");
+var fs = require("fs");
+
+app.use("/image",function (req, res, next) {
+    // Uses path.join to find the path where the file should be
+    var filePath = path.join(__dirname,
+        "images"
+        , req.url);
+    // Built-in fs.stat gets info about a file
+    fs.stat(filePath, function (err, fileInfo) {
+        if (err) {
+            next();
+            return;
+        }
+        if (fileInfo.isFile()) res.sendFile(filePath);
+        else next();
+    });
+});
+
+app.use("/image", function (request, response) {
+    response.writeHead(200, { "Content-Type": "text/plain" });
+    response.end("Looks like you didn’t find a static file.");
+});
+// app.use(function (req, res) {
+//     // Sets the status code to 404
+//     res.status(404);
+//     // Sends the error "File not found!”
+//     res.send("File not found!");
+// });
+
+
+// var publicPath = path.resolve(__dirname,
+//     "/images");
+// console.log(publicPath);
+// Sends static files from the publicPath directory
+
+// app.use("/images", express.static(publicPath));
+
 
 // dispaly a message for root path to show that API is working
-app.get('/'
-    , function (req, res) {
-        res.send('Select a collection, e.g., /collection/messages')
-    })
+
 // retrieve all the objects from an collection
 app.get('/collection/:collectionName'
     , (req, res) => {
@@ -76,17 +101,46 @@ app.get('/collection/:collectionName'
         })
     })
 
-app.post('/collection/:collectionName'
-    , (req, res, next) => {
-        console.log(req);
-       req.collection.insert(req.body, (e, results) => {
+app.get('/collection/:collectionName/:searchTerm'
+    , (req, res) => {
+        console.log(req.params.searchTerm)
+        var regex = new RegExp(req.params.searchTerm, "i");
+        console.log(regex)
+        req.collection.find({ subject: regex }).toArray((e, results) => {
             if (e) return next(e)
-            res.send(results.ops)
+            res.send(results)
+            console.log(results)
         })
     })
 
+app.post('/collection/:collectionName'
+    , (req, res, next) => {
+        console.log(req);
+        req.collection.insert(req.body, (e, results) => {
+            if (e) return next(e)
+            res.send(200)
+        })
+    });
+const ObjectID = require('mongodb').ObjectID;
+
+app.put('/collection/:collectionName/:id', (req, res, next) => {
+    console.log(req.params.id);
+    req.collection.update(
+        { _id: new ObjectID(req.params.id) },
+        { $set: req.body },
+        { safe: true, multi: false },
+        (e, result) => {
+            if (e) return next(e)
+            res.send((result.matchedCount === 1) ? { msg: 'success' } : { msg: 'error' })
+        })
+});
+app.use('/'
+    , function (req, res) {
+        res.send('Select a collection, e.g., /collection/messages')
+    });
+
 //Start the app listening on port 8080
-app.listen(8080);
+app.listen(8084);
 
 async function handleProductGet(request, response) {
 

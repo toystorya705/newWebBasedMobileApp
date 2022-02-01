@@ -27,7 +27,7 @@
 
                <div v-if='showProduct'>
 
-                    <input placeholder="Search Lesson" icon="search" v-model="filter">
+                    <input placeholder="Search Lesson" icon="search" @keyup="productsFetch" v-model="filter">
 
 
                     <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
@@ -59,7 +59,7 @@
                     </button>
                     <h1>BSc Information Techonology</h1>
                     <div class="card-deck">
-                         <div v-for="product in getproduct" class="card" style="width: 18rem;">
+                         <div v-for="product,index in getproduct":key="index" class="card" style="width: 18rem;">
                               <img class="card-img-top" v-bind:src="product.image" alt="Card image cap">
                               <div class="card-body">
                                    <p class="card-title">Subject: {{product.subject}}</p>
@@ -73,8 +73,8 @@
                                    </div>
 
 
-                                   <button type="button" v-on:click="addItem(product.id)" class="btn btn-primary"
-                                        :disabled="isDisabled(product.id)">Add
+                                   <button type="button" v-on:click="addItem(index)" class="btn btn-primary"
+                                        :disabled="product.stock==0?true:false">Add
                                         To Cart</button>
                                    <span v-if="product.stock === 0">All out!</span>
                                    <span v-else-if="product.stock  < 5">

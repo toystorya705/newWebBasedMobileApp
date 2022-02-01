@@ -1,13 +1,20 @@
 
-
+// {id:"",
+// image:"",
+// location: "",
+// price: "",
+// rating: "",
+// stock: "",
+// subject:"",
+// _id: ""}
 let app = new Vue({
     el: "#app",
     data: {
 
-        product: [],
+        product:null,
         showProduct: true,
         filterName: '',
-        filter: '',
+        filter:"",
         sort: '',
         messageCheckout: "",
         order: {
@@ -18,28 +25,38 @@ let app = new Vue({
 
 
         cart: []
-    },
+    },components: {
+        Keypress: () => import('vue-keypress')
+      },
     methods: {
         //  This function decrease the value of stock by 1 every time user click Button
 
 
-        productsFetch: async function () {
-            const response = await fetch("/collection/products");
+        productsFetch: async function (query) {  
+           let response ;
+            if(this.filter!="") {
+                this.product=null;
+           response = await fetch("/collection/products/"+this.filter);
+           console.log("yoyoy")
+            }
+            else{
+            response = await fetch("/collection/products");
+            }
+
             const data = await response.json();
-            this.product = data;
+            console.log(data);
+            app.product = data;
         },
         addItem(itemId) {
             if (this.product[itemId].stock > 0) {
-
+           
                 this.stock = --this.product[itemId].stock;
                 console.log(this.product[itemId].stock);
                 this.cart.push(itemId);
             }
         },
 
-        isDisabled(itemId) {
-            return this.product[itemId].stock === 0
-        },
+      
 
         showCart() {
             this.showProduct = this.showProduct ? false : true
@@ -70,36 +87,54 @@ let app = new Vue({
 
 
             console.log("hdjdjdjdj")
-            let orderCheck={
-                orderProducts:[]
-            }
-            orderCheck = Object.assign({}, this.order,orderCheck);
+            let orderCheck = []
+            let updateStock=[]
             for (let i = 0; i < this.product.length; i++) {
                 if (this.cartCount(this.product[i].id) != 0) {
-                    orderCheck.orderProducts.push({
-                        productID: this.product[i].id,
+                    orderCheck.push(Object.assign({}, this.order, {
+                        productID: this.product[i]._id,
+                        stock: this.cartCount(this.product[i].id)
+
+                    }));
+                    updateStock.push(Object.assign({}, this.product[i], {
                         stock: this.product[i].stock
 
-                    });
+                    }));
+                   
                     console.log("hjueheufjeferf");
 
                 }
             }
-            console.log(orderCheck);
+            console.log(orderCheck,updateStock,updateStock[0]._id);
 
-            const response = await fetch("/collection/users", {
-                method: 'POST', //JSON
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: (JSON.stringify(orderCheck))//Sending object for if statement
-            });
-            const result = await response.text();//Receiving response
+            let data = await this.fetchFunction(orderCheck, "POST","/collection/users");
+            if(data=="OK"){
+                for (let i = 0; i < updateStock.length; i++) {
+                    let id=updateStock[i]._id;
+                    delete updateStock[i]._id;
+                    let check=await this.fetchFunction(updateStock[i], "PUT","/collection/products/"+id);
+                    console.log(check);
+                }
+            }
+
+            console.log("yoyoy")
+            console.log(data);
 
 
             this.messageCheckout = "Order Placed";
 
         },
+        fetchFunction: async function (data, type,api) {
+            const response = await fetch(api, {
+                method: type, //JSON
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: (JSON.stringify(data))//Sending object for if statement
+            });
+            return await response.text();//Receiving response
+        },
+
         filterClick() {
 
 
@@ -111,7 +146,17 @@ let app = new Vue({
 
             this.sort = ""
 
-        }
+        },
+        // filterSearch : async function (){
+        //     // this.productsFetch().then()
+        //     // this.product =[];
+        //     const response = await fetch("/collection/products/"+this.filter);
+        //     let data = await response.json();
+        //     console.log(data);
+        //     this.product = data;
+           
+        //     // this.product = data;
+        // }
 
     },
     computed: {// This disables the button at 0 stock
@@ -134,9 +179,7 @@ let app = new Vue({
 
         getproduct() {
 
-            var product = this.product.filter((product) => {
-                return product.subject.toLowerCase().includes(this.filter.toLowerCase());
-            });
+            var product = this.product;
 
             if (this.filterName == "subject") {
 
