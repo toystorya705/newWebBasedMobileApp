@@ -8,7 +8,7 @@
     "vue-keypress": "^2.1.1"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "name": "newwebbasedmobileapp",
   "description": "Code Link: https://github.com/toystorya705/webBasedMobileApp",
