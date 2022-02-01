@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "1df3ace9-a9e7-486c-9d86-58b3b7b444d7",
+		"name": "WebBaseMobileApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/collection/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"collection",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"subject\": \"English Litreature\",\r\n    \"location\": \"Lucknow\",\r\n    \"price\": \"50\",\r\n    \"stock\":10006,\r\n    \"image\": \"http://1.bp.blogspot.com/-Mu8arOTSEzo/TxrurYbAWNI/AAAAAAAAAGI/lqrgOo0ywXM/s1600/language-arts-reading-material+copy.gif\",\r\n    \"rating\": 5,\r\n    \"id\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/collection/products/eng",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"collection",
+						"products",
+						"eng"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "image request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://vueproject99.herokuapp.com//image/img1.gi",
+					"protocol": "https",
+					"host": [
+						"vueproject99",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"",
+						"image",
+						"img1.gi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place Order",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Error Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/s",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"s"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "image error request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
