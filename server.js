@@ -2,6 +2,7 @@
 const { json } = require('body-parser');
 let express = require('express');
 let url = require("url");
+var cors = require('cors')
 
 const port = process.env.PORT || 3000
 //The express module is a function. When it is executed it returns an app object
@@ -10,7 +11,7 @@ let app = express();
 app.use(express.static("public"));
 
 
-
+app.use(cors())
 
 //Set up the application to handle GET requests sent to the user path
 app.get('/lessons', function (req, res) {

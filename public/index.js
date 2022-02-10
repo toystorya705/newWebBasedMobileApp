@@ -36,11 +36,11 @@ let app = new Vue({
            let response ;
             if(this.filter!="") {
                 this.product=null;
-           response = await fetch("/collection/products/"+this.filter);
+           response = await fetch("https://vueproject99.herokuapp.com/collection/products/"+this.filter);
            console.log("yoyoy")
             }
             else{
-            response = await fetch("/collection/products");
+            response = await fetch("https://vueproject99.herokuapp.com/collection/products");
             }
 
             const data = await response.json();
@@ -107,12 +107,12 @@ let app = new Vue({
             }
             console.log(orderCheck,updateStock,updateStock[0]._id);
 
-            let data = await this.fetchFunction(orderCheck, "POST","/collection/users");
+            let data = await this.fetchFunction(orderCheck, "POST","https://vueproject99.herokuapp.com/collection/users");
             if(data=="OK"){
                 for (let i = 0; i < updateStock.length; i++) {
                     let id=updateStock[i]._id;
                     delete updateStock[i]._id;
-                    let check=await this.fetchFunction(updateStock[i], "PUT","/collection/products/"+id);
+                    let check=await this.fetchFunction(updateStock[i], "PUT","https://vueproject99.herokuapp.com/collection/products/"+id);
                     console.log(check);
                 }
             }
