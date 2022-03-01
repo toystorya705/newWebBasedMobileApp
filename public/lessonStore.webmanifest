@@ -1,0 +1,15 @@
+{
+    "name":"Lesson Store",
+    "shoer_name":"Store",
+    "description":"Online lesson Store",
+    "icons":[{
+        
+            "src":"image/1.jpg",
+            "sizes":"512*512",
+            "type":"image/jpg"
+        }
+    ],
+    "start_url":"index.html",
+    "dispplay":"fullscreen",
+    "background_colour":"#B12A34"
+}

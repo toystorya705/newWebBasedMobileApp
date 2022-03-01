@@ -36,7 +36,7 @@ let app = new Vue({
            let response ;
             if(this.filter!="") {
                 this.product=null;
-           response = await fetch("https://vueproject99.herokuapp.com/collection/products/"+this.filter);
+           response =  await fetch("https://vueproject99.herokuapp.com/collection/products/"+this.filter);
            console.log("yoyoy")
             }
             else{
