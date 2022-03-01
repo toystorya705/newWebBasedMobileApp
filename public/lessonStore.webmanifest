@@ -1,6 +1,6 @@
 {
     "name":"Lesson Store",
-    "shoer_name":"Store",
+    "short_name":"Store",
     "description":"Online lesson Store",
     "icons":[{
         
@@ -10,6 +10,6 @@
         }
     ],
     "start_url":"index.html",
-    "dispplay":"fullscreen",
+    "display":"fullscreen",
     "background_colour":"#B12A34"
 }
