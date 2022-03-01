@@ -258,6 +258,14 @@ let app = new Vue({
     }
 });
 
+function openNav() {
+    document.getElementById("mySidenav").style.display = "block";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidenav").style.display = "none";
+  }
+
 // var layout = {
 //     title: "Plot Title",
 //     xaxis: {
