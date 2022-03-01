@@ -4,9 +4,9 @@
     "description":"Online lesson Store",
     "icons":[{
         
-            "src":"image/1.jpg",
+            "src":"image/2.png",
             "sizes":"512x512",
-            "type":"image/jpg"
+            "type":"image/png"
         }
     ],
     "start_url":"index.html",
