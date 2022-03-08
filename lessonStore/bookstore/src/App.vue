@@ -1,5 +1,20 @@
 <template>
+
 <div id="app">
+
+    <div class="navBar">
+
+    <input class="searcBar" placeholder="Search Lesson" icon="search" @keyup="productsFetch" v-model="filter">
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+</div>
     <p>
         <input v-on:click="defaultClick" type="radio" id="default" value="default" v-model="filterName">
         <label for="default">Default</label>
