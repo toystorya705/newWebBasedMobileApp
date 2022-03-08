@@ -11,10 +11,10 @@ let app = new Vue({
     el: "#app",
     data: {
 
-        product:null,
+        product: null,
         showProduct: true,
         filterName: '',
-        filter:"",
+        filter: "",
         sort: '',
         messageCheckout: "",
         order: {
@@ -25,22 +25,22 @@ let app = new Vue({
 
 
         cart: []
-    },components: {
+    }, components: {
         Keypress: () => import('vue-keypress')
-      },
+    },
     methods: {
         //  This function decrease the value of stock by 1 every time user click Button
 
 
-        productsFetch: async function (query) {  
-           let response ;
-            if(this.filter!="") {
-                this.product=null;
-           response =  await fetch("https://vueproject99.herokuapp.com/collection/products/"+this.filter);
-           console.log("yoyoy")
+        productsFetch: async function (query) {
+            let response;
+            if (this.filter != "") {
+                this.product = null;
+                response = await fetch("https://vueproject99.herokuapp.com/collection/products/" + this.filter);
+                console.log("yoyoy")
             }
-            else{
-            response = await fetch("https://vueproject99.herokuapp.com/collection/products");
+            else {
+                response = await fetch("https://vueproject99.herokuapp.com/collection/products");
             }
 
             const data = await response.json();
@@ -49,14 +49,14 @@ let app = new Vue({
         },
         addItem(itemId) {
             if (this.product[itemId].stock > 0) {
-           
+
                 this.stock = --this.product[itemId].stock;
                 console.log(this.product[itemId].stock);
                 this.cart.push(itemId);
             }
         },
 
-      
+
 
         showCart() {
             this.showProduct = this.showProduct ? false : true
@@ -88,7 +88,7 @@ let app = new Vue({
 
             console.log("hdjdjdjdj")
             let orderCheck = []
-            let updateStock=[]
+            let updateStock = []
             for (let i = 0; i < this.product.length; i++) {
                 if (this.cartCount(this.product[i].id) != 0) {
                     orderCheck.push(Object.assign({}, this.order, {
@@ -100,19 +100,19 @@ let app = new Vue({
                         stock: this.product[i].stock
 
                     }));
-                   
+
                     console.log("hjueheufjeferf");
 
                 }
             }
-            console.log(orderCheck,updateStock,updateStock[0]._id);
+            console.log(orderCheck, updateStock, updateStock[0]._id);
 
-            let data = await this.fetchFunction(orderCheck, "POST","https://vueproject99.herokuapp.com/collection/users");
-            if(data=="OK"){
+            let data = await this.fetchFunction(orderCheck, "POST", "https://vueproject99.herokuapp.com/collection/users");
+            if (data == "OK") {
                 for (let i = 0; i < updateStock.length; i++) {
-                    let id=updateStock[i]._id;
+                    let id = updateStock[i]._id;
                     delete updateStock[i]._id;
-                    let check=await this.fetchFunction(updateStock[i], "PUT","https://vueproject99.herokuapp.com/collection/products/"+id);
+                    let check = await this.fetchFunction(updateStock[i], "PUT", "https://vueproject99.herokuapp.com/collection/products/" + id);
                     console.log(check);
                 }
             }
@@ -124,7 +124,7 @@ let app = new Vue({
             this.messageCheckout = "Order Placed";
 
         },
-        fetchFunction: async function (data, type,api) {
+        fetchFunction: async function (data, type, api) {
             const response = await fetch(api, {
                 method: type, //JSON
                 headers: {
@@ -154,7 +154,7 @@ let app = new Vue({
         //     let data = await response.json();
         //     console.log(data);
         //     this.product = data;
-           
+
         //     // this.product = data;
         // }
 
@@ -260,11 +260,11 @@ let app = new Vue({
 
 function openNav() {
     document.getElementById("mySidenav").style.display = "block";
-  }
-  
-  function closeNav() {
+}
+
+function closeNav() {
     document.getElementById("mySidenav").style.display = "none";
-  }
+}
 
 // var layout = {
 //     title: "Plot Title",
