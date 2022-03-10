@@ -129,7 +129,8 @@ export default {
 
             this.sort = ""
 
-        }
+        },
+       
     },
     computed: {
 
@@ -236,13 +237,14 @@ export default {
     width: 80%;
 }
 
-.navBar {
+#app > div.navBar {
     background-color: greenyellow;
     margin-top: -16px;
     width: 1000px;
     height: 150px;
     margin-left: -20px;
 }
+
 
 .searcBar {
     display: flex;
@@ -261,7 +263,7 @@ export default {
     width: 0;
     position: fixed;
     z-index: 1;
-    top: 0;
+    top: -100px;
     left: 0;
     background-color: #111;
     overflow-x: hidden;
